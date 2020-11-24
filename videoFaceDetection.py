@@ -170,7 +170,7 @@ while i < count:
 
 
 
-
+	#### Mouth open, eyes blink detection. Emoji mirror
         # leftEye = shape[42:48]
         # rightEye = shape[36:42]
         # leftEAR = eye_aspect_ratio(leftEye)
@@ -324,7 +324,7 @@ def getLandmarks(image, gray, rect):
     jaw_pts = shape[0:17]
     return (landmarks, left_eye_pts, right_eye_pts, mouth_pts, left_eyebrow_pts, right_eyebrow_pts, nose_pts, jaw_pts)
 
-
+#### TODO: Fix Face Rotation.
 # image = cv2.imread("init_color_frames/frame1.jpg")
 # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 # rects = detector(gray, 1)
