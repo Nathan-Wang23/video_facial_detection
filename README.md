@@ -1,1 +1,1 @@
-# Self-driving-gocart
+# playing with neural nets from scratch
