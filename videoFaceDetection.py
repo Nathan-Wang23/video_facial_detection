@@ -71,6 +71,7 @@ def rect_to_bb(rect):
     h = rect.bottom() - y
     return (x, y, w, h)
 
+# Euclidian finds shortest distance between the two points.
 def eye_aspect_ratio(eye):
     A = dist.euclidean(eye[1], eye[5])
     B = dist.euclidean(eye[2], eye[4])
@@ -137,18 +138,18 @@ while i < count:
             (150.0, -150.0, -125.0)      # Right mouth corner
         ])
 
-        focal_length = size[1]
+        focal_l = size[1]
         center = (size[1]/2, size[0]/2)
-        camera_matrix = np.array(
-            [[focal_length, 0, center[0]],
-            [0, focal_length, center[1]],
+        camera = np.array(
+            [[focal_l, 0, center[0]],
+            [0, focal_l, center[1]],
             [0, 0, 1]], dtype = "double")
 
 
         dist_coeffs = np.zeros((4,1)) # Assuming no lens distortion
-        (success, rotation_vector, translation_vector) = cv2.solvePnP(model_points, image_points, camera_matrix, dist_coeffs, flags=cv2.cv2.SOLVEPNP_ITERATIVE)
+        (success, rotation_vector, translation_vector) = cv2.solvePnP(model_points, image_points, camera, dist_coeffs, flags=cv2.cv2.SOLVEPNP_ITERATIVE)
 
-        (nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 1000.0)]), rotation_vector, translation_vector, camera_matrix, dist_coeffs)
+        (nose_end_point2D, jacobian) = cv2.projectPoints(np.array([(0.0, 0.0, 1000.0)]), rotation_vector, translation_vector, camera, dist_coeffs)
 
         for p in image_points:
             cv2.circle(gr, (int(p[0]), int(p[1])), 3, (0,0,255), -1)
